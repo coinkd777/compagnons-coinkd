@@ -25,6 +25,9 @@ const Contact = () => {
 
     try {
       const { error } = await supabase.functions.invoke("send-quote", {
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: data,
       });
 
