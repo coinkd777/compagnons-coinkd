@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 217 80% 17%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 43 56% 52%;
+    --secondary-foreground: 217 80% 17%;
+
+    --muted: 220 20% 95%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 43 56% 52%;
+    --accent-foreground: 217 80% 17%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 43 56% 52%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 217 80% 17%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 43 56% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 80% 22%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217 60% 25%;
+    --sidebar-ring: 43 56% 52%;
+
+    /* Custom tokens */
+    --navy: 217 80% 17%;
+    --navy-light: 217 60% 25%;
+    --gold: 43 56% 52%;
+    --gold-light: 43 56% 62%;
+    --text-dark: 0 0% 10%;
+    --text-body: 0 0% 25%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+/* Signature button hover animation */
+@keyframes border-trace {
+  0% { clip-path: inset(0 100% 100% 0); }
+  25% { clip-path: inset(0 0 100% 0); }
+  50% { clip-path: inset(0 0 0 0); }
+  75% { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+.btn-devis {
+  @apply relative overflow-hidden transition-colors duration-300;
+}
+
+.btn-devis::after {
+  content: '';
+  @apply absolute inset-0 pointer-events-none;
+  border: 1px solid hsl(var(--gold));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-devis:hover::after {
+  opacity: 1;
+  animation: border-trace 0.6s ease forwards;
+}
+
+.btn-devis:hover {
+  color: hsl(var(--gold)) !important;
+}
+
+/* Gold separator */
+.gold-separator {
+  @apply w-16 h-px mx-auto;
+  background: hsl(var(--gold));
+}
+
+/* Section spacing */
+.section-spacing {
+  @apply py-16 md:py-24 lg:py-30;
+}
+
+/* Container narrow */
+.container-narrow {
+  @apply max-w-5xl mx-auto px-6 md:px-8;
+}
