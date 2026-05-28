@@ -56,9 +56,20 @@ Description : ${description || "Aucune description"}
 COMPAGNONS COIN KD - Demande via le site web
     `.trim();
 
-    // Send email via Supabase Auth admin (or log for now)
-    console.log("New quote request received:");
-    console.log(emailBody);
+    const resendKey = Deno.env.get("RESEND_API_KEY");
+await fetch("https://api.resend.com/emails", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": Bearer ${resendKey},
+  },
+  body: JSON.stringify({
+    from: "onboarding@resend.dev",
+    to: "artisan.coinkd@gmail.com",
+    subject: Nouveau devis - ${type_travaux},
+    text: emailBody,
+  }),
+});
 
     return new Response(
       JSON.stringify({ success: true, message: "Demande envoyée avec succès" }),
