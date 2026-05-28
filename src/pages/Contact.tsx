@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Send, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -24,14 +23,13 @@ const Contact = () => {
     };
 
     try {
-      const { error } = await supabase.functions.invoke("send-quote", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: data,
+      const res = await fetch("/api/send-quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
-
-      if (error) throw error;
+      
+      if (!res.ok) throw new Error("Erreur envoi");
 
       setSubmitted(true);
       toast({
